@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    @if (@ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title</title>
+    }
+    else
+    {
+        <title>POS Admin</title>
+    }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="~/Areas/Admin/assets/css/Style.css" rel="stylesheet" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/Areas/Admin/assets/css/custom.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+
+    <link href="~/Content/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
+
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/Content/plugins/toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="~/Content/plugins/jquery.min.js"></script>
+    <script src="~/Content/plugins/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/Content/plugins/select2/dist/js/Select2Common.js"></script>
+    <link href="~/Content/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/colvis/1.1.2/css/dataTables.colVis.min.css" rel="stylesheet" />
+
+    @RenderSection("head", required: false)
+    <style type="text/css">
+        #loading-image {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 10000000;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+            #loading-image .bg {
+                background: #000000;
+                opacity: 0.7;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+            }
+
+        #image-loading {
+            width: 250px;
+            height: 75px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            font-size: 16px;
+            z-index: 10;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<!-- END HEAD -->
+
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner ">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="@Url.Action("DashBoard", "SystemUsers", new { Area="Admin" })">
+                    <img src="~/Areas/Admin/assets/logo-light.png" alt="logo" class="logo-default" width="80" />
+                </a>
+                <div class="menu-toggler sidebar-toggler">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN PAGE ACTIONS -->
+            <!-- DOC: Remove "hide" class to enable the page header actions -->
+            <div class="page-actions">
+                <div class="btn-group">
+                </div>
+            </div>
+            <!-- END PAGE ACTIONS -->
+            <!-- BEGIN PAGE TOP -->
+            <div class="page-top">
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="separator hide"> </li>
+                        <li class="dropdown dropdown-user dropdown-dark">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                                @if (Session["UserName"] != null)
+                                {
+                                    <span class="username username-hide-on-mobile">
+                                        @Session["UserName"].ToString()
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="username username-hide-on-mobile">
+                                        Nick
+                                    </span>
+                                }
+
+
+
+                                <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+
+
+                                <img alt="" class="img-circle" src="/Areas/Admin/assets/logo-light.png" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+
+                                <li>
+                                    <a href="#">
+                                        @*<i class="icon-calendar"></i>*@<i class="fa fa-key" aria-hidden="true"></i> Change Password
+                                    </a>
+                                </li>
+                                <li class="divider"> </li>
+
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END PAGE TOP -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+
+
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN SIDEBAR -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar navbar-collapse collapse">
+
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+                    <li class="nav-item ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-notebook"></i>
+                            <span class="title">Master</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item " id="banks">
+                                <a href="@Url.Action("Index", "bank", new { Area = "Admin" })" class="nav-link ">
+                                    <span class="title">Bank</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item " id="cities">
+                                <a href="@Url.Action("Index", "City", new { Area = "Admin" })" class="nav-link ">
+                                    <span class="title">City</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    }
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+            <!-- END SIDEBAR -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div id="loading-image" style="display:none">
+                <div id="image-loading">
+                    <img src="~/Areas/Admin/assets/img/ajax-loader.gif" />
+                    <div>
+                        loading data.. please wait..
+                    </div>
+                </div><div class="bg"></div>
+            </div>
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                @RenderBody()
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <a href="javascript:;" class="page-quick-sidebar-toggler">
+            <i class="icon-login"></i>
+        </a>
+
+        <!-- END QUICK SIDEBAR -->
+    </div>
+
+
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <!--<div class="page-footer-inner"> 2014 &copy; Metronic by keenthemes.
+            <a href="#" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
+        </div>-->
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.js"></script>
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/plugins/moment.min.js"></script>
+    <script src="~/Content/plugins/morris/morris.min.js"></script>
+    <script src="~/Content/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Content/plugins/lodash.js"></script>
+    <script src="~/Content/plugins/bootstrap-rating.js"></script>
+    <script src="~/Content/plugins/DataTable/datatables.min.js"></script>
+    <script src="~/Content/plugins/DataTable/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/DataTable/buttons.print.min.js"></script>
+    @*<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>*@
+    <script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
+    <script src="~/Content/plugins/DataTable/DataTableCommon.js"></script>
+    <script src="~/Content/plugins/bootbox/bootbox.min.js"></script>
+    <script src="~/Areas/Admin/assets/scripts/app.js"></script>
+    <script src="~/Areas/Admin/assets/scripts/layout.min.js"></script>
+    <script src="~/Content/Scripts/Common.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        function SelectedIndexChanged() {
+            ChangeLanguage($("#ddlLng").val());
+        }
+        $(document).ajaxStart(function () {
+            $("#loading-image").show();
+        });
+        $(document).ajaxStop(function () {
+            $("#loading-image").hide();
+        });
+        $(document).on("shown.bs.dropdown", ".dropdown", function () {
+            // calculate the required sizes, spaces
+            var $ul = $(this).children(".dropdown-menu");
+            var $button = $(this).children(".dropdown-toggle");
+            var ulOffset = $ul.offset();
+            // how much space would be left on the top if the dropdown opened that direction
+            var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+            // how much space is left at the bottom
+            var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+            // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+            if (spaceDown < 40 && (spaceUp >= 0 || spaceUp > spaceDown))
+                $(this).addClass("dropup");
+        }).on("hidden.bs.dropdown", ".dropdown", function () {
+            // always reset after close
+            $(this).removeClass("dropup");
+        });
+
+    </script>
+</body>
+</html>

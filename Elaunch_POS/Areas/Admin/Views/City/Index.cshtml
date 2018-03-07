@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "City List";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div id='myModal' class='modal fade' role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id='myModalContent' class="modal-content modal-popup">
+        </div>
+    </div>
+</div>
+<div class="page-head">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (null != TempData["successmsg"])
+        {
+            <div class="alert alert-success" id="errordiv">
+                <button class="close" data-close="alert" id="closeMsg" type="button"></button>
+                <span>@TempData["successmsg"]</span>
+            </div>
+        }
+        @if (null != TempData["errormsg"])
+        {
+            <div class="alert alert-danger" id="errordiv">
+                <button class="close" data-close="alert" id="closeMsg" type="button"></button>
+                <span>@TempData["errormsg"]</span>
+            </div>
+        }
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase">City List</span>
+                </div>
+            </div>
+            <div class="table-scrollable">
+                <table id="example" class="display table table-striped table-bordered table-hover order-column"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SetActiveTab("cities");
+            loaderstart();
+            var columns = [
+                  { "title": "City Name", "data": "City_Name" },
+                  {
+                      "bSortable": false, "className": "alignRight", "width": "45px", "title": "Action", "render": function (data, type, full, meta) {
+                          var url = "@Url.Action("ManageCity", "City")/" + full.City_ID;
+                          var btns = "<li><a  data-editmodal title=\"Edit\" onclick=\"OpenPopup('myModal','myModalContent','" + url + "','ModalForm')\" class=\"anchorDetail \" data-id='" + full.City_ID + "'><i class=\"fa fa-edit font-green xs-pr-10\"></i>Edit</a></li>";
+                          btns += "<li><a  data-editmodal href=\"javascript:void(0)\" onclick=\"Delete(this,'/Admin/City/Delete','Are you sure to delete this record?','Ok','Cancel')\" class=\"anchorDetail  \" data-id='" + full.City_ID + "'><i class=\"fa fa-trash font-red xs-pr-10\"></i>Delete</a></li>";
+                          var bb = '<div class="dropdown btn-group"><button type="button" data-tooltip=\"true\" title=\"Actions\" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button><ul class="dropdown-menu pull-right">' + btns + '</ul></div >';
+                          return bb;
+                      }
+                  }
+            ];
+
+            $('#example').createGrid({
+                Columns: columns,
+                Mode: 'CitiMaster',
+                SortColumn: '0',
+                SortOrder: 'desc',
+                OnAdd: function () {
+                    loaderstart();
+                    var url = '@Url.Action("ManageCity", "City", new { Area = "Admin" })';
+                    OpenPopup('myModal', 'myModalContent', url, 'ModalForm');
+                    loaderstop();
+                    return false;
+                }
+            });
+            loaderstop();
+        });
+
+        $(window).load(function () {
+            loaderstop();
+        });
+
+        $(document).ready(function () {
+            $("#closeMsg").click(function () {
+                $("#errordiv").hide();
+            });
+        });
+
+    </script>
+}

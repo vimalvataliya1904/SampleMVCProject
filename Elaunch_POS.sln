@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27019.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elaunch_POS", "Elaunch_POS\Elaunch_POS.csproj", "{134E40B1-CF36-451D-A1D4-8F41887A5645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elaunch_POS_Repository", "Elaunch_POS_Repository\Elaunch_POS_Repository.csproj", "{57049E00-459D-4F28-AC97-9477F12409D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{134E40B1-CF36-451D-A1D4-8F41887A5645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{134E40B1-CF36-451D-A1D4-8F41887A5645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{134E40B1-CF36-451D-A1D4-8F41887A5645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{134E40B1-CF36-451D-A1D4-8F41887A5645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57049E00-459D-4F28-AC97-9477F12409D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57049E00-459D-4F28-AC97-9477F12409D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57049E00-459D-4F28-AC97-9477F12409D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57049E00-459D-4F28-AC97-9477F12409D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA7CB12B-7770-417F-A93E-4BAC0D8EA762}
+	EndGlobalSection
+EndGlobal

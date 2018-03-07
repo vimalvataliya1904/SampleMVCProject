@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{57049E00-459D-4F28-AC97-9477F12409D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Elaunch_POS_Repository</RootNamespace>
+    <AssemblyName>Elaunch_POS_Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFrameworkExtras.EF6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkExtras.EF6.1.0.0\lib\net45\EntityFrameworkExtras.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.32.2\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.32.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.32.2\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.32.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.32.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Urlshortener.v1, Version=1.32.2.138, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Urlshortener.v1.1.32.2.138\lib\net45\Google.Apis.Urlshortener.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataServices\CommonFunctions.cs" />
+    <Compile Include="DataServices\CreatePara.cs" />
+    <Compile Include="DataServices\dalc.cs" />
+    <Compile Include="DataServices\EncryptDecrypt.cs" />
+    <Compile Include="Data\Bank.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Branch.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Cashier.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Cashier_Device.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Cashier_Key.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Category.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\City.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Daily_Balance.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ID_Types.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_In.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_IN_Requests.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_IN_Request_Items.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_Out.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_Out_Reasons.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_Transfers.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Inventory_Transfer_Items.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Invoice.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Invoice_Details.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LanguageWord.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Management_Discounts.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Payment.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Payment_Types.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Permission.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Pos.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pos.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Pos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Pos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pos.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Product.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Product_Ratings.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Refund.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Refund_Details.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Saving_Methods.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Sub_Products.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Sub_Product_Branches.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\System_Users.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tax.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Trader.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\User_Types.cs">
+      <DependentUpon>Pos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\BankDTO.cs" />
+    <Compile Include="DTO\CityDTO.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContract\IBanks_Repository.cs" />
+    <Compile Include="ServiceContract\ICities_Repository.cs" />
+    <Compile Include="Service\Banks_Repository.cs" />
+    <Compile Include="Service\Cities_Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Data\Pos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Pos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\Pos.edmx.diagram">
+      <DependentUpon>Pos.edmx</DependentUpon>
+    </None>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\Elaunch_POS_Repository.csprojResolveAssemblyReference.cache" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Elaunch_POS_Repository.dll" />
+    <Content Include="bin\Debug\Elaunch_POS_Repository.pdb" />
+    <Content Include="Data\Pos.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pos.edmx</DependentUpon>
+      <LastGenOutput>Pos.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Pos.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pos.edmx</DependentUpon>
+      <LastGenOutput>Pos.cs</LastGenOutput>
+    </Content>
+    <Content Include="obj\Debug\Elaunch_POS_Repository.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Elaunch_POS_Repository.dll" />
+    <Content Include="obj\Debug\Elaunch_POS_Repository.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9071d7bc0d8545e4ac7629e8a4ba92c4" Name="Diagram1">
+        <EntityTypeShape EntityType="elaunch_pos2Model.Bank" Width="1.5" PointX="0.75" PointY="21.25" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Branch" Width="1.5" PointX="3" PointY="32.125" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Cashier_Device" Width="1.5" PointX="9.75" PointY="52.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Cashier_Key" Width="1.5" PointX="7.5" PointY="52.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Cashier" Width="1.5" PointX="5.25" PointY="41.5" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Category" Width="1.5" PointX="6" PointY="16.375" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.City" Width="1.5" PointX="0.75" PointY="24.375" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Daily_Balance" Width="1.5" PointX="10.5" PointY="37.5" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.ID_Types" Width="1.5" PointX="0.75" PointY="27.75" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_In" Width="1.5" PointX="8.25" PointY="32.875" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_IN_Request_Items" Width="1.5" PointX="7.5" PointY="28.25" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_IN_Requests" Width="1.5" PointX="5.25" PointY="26" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_Out" Width="1.5" PointX="5.25" PointY="32.875" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_Out_Reasons" Width="1.5" PointX="3" PointY="38.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_Transfer_Items" Width="1.5" PointX="7.5" PointY="46.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Inventory_Transfers" Width="1.5" PointX="5.25" PointY="46.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Invoice_Details" Width="1.5" PointX="9.75" PointY="42" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Invoice" Width="1.5" PointX="7.5" PointY="37.375" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.LanguageWord" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Management_Discounts" Width="1.5" PointX="5.25" PointY="37.375" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Payment_Types" Width="1.5" PointX="3" PointY="18.5" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Payment" Width="1.5" PointX="5.25" PointY="20.125" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Permission" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Product_Ratings" Width="1.5" PointX="12" PointY="42.875" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Product" Width="1.5" PointX="8.25" PointY="23.25" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Refund" Width="1.5" PointX="12.75" PointY="37.5" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Refund_Details" Width="1.5" PointX="15" PointY="29.875" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Saving_Methods" Width="1.5" PointX="6" PointY="12.875" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Sub_Product_Branches" Width="1.5" PointX="5.25" PointY="29.5" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Sub_Products" Width="1.5" PointX="10.5" PointY="22.625" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.System_Users" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Tax" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.Trader" Width="1.5" PointX="3" PointY="21" />
+        <EntityTypeShape EntityType="elaunch_pos2Model.User_Types" Width="1.5" PointX="0.75" PointY="1.75" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Payments_Banks" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Traders_Banks" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Branches_Cities" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Cashiers_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Daily_Opening_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_In_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Out_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Transfers_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Transfers_Branches1" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Invoices_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Refund_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Sub_Product_Branches_Branches" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Cashier_Device_Cashier_Key" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Cashier_Key_Cashiers" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Daily_Opening_Cashiers" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Invoices_Cashiers" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Refund_Cashiers" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Products_Categories" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Traders_Cities" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Traders_ID_Types" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_In_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Inventory_IN_Requests" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_IN_Requests_Traders" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Out_Inventory_Out_Reasons" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Out_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Inventory_Transfer_Items_Inventory_Transfers" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Invoice_Details_Invoices" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Invoice_Details_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Product_Ratings_Invoice_Details" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Invoices_Discount_Codes" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Refund_Invoices" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Payments_Payment_Types" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Payments_Traders" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Products_Saving_Methods" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Products_Traders" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Sub_Products_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Refund_Details_Refund" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Refund_Details_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_Sub_Product_Branches_Sub_Products" />
+        <AssociationConnector Association="elaunch_pos2Model.FK_System_Users_User_Types" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

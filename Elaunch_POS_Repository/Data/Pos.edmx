@@ -1,0 +1,2883 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="elaunch_pos2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Bank_ID" />
+          </Key>
+          <Property Name="Bank_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bank_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Branch_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="City_ID" Type="int" />
+          <Property Name="Latitude" Type="decimal" Precision="15" Scale="11" />
+          <Property Name="Longitude" Type="decimal" Precision="15" Scale="11" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cashier_Device">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="int" Nullable="false" />
+          <Property Name="Device_Type" Type="tinyint" />
+          <Property Name="Device_Token" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Cashier_Key">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="int" Nullable="false" />
+          <Property Name="API_Key" Type="nvarchar" MaxLength="100" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cashiers">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cashiers_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="Cashier_Prefix" Type="nvarchar" MaxLength="10" />
+          <Property Name="Refund_PIN_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PIN_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="Is_Logged_In" Type="bit" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category_Image" Type="image" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Daily_Balance">
+          <Key>
+            <PropertyRef Name="Balance_Date" />
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Balance_Date" Type="date" Nullable="false" />
+          <Property Name="Cashier_ID" Type="int" Nullable="false" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="Opening_Value" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Closing_Value" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ID_Types">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Inventory_In">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Transaction_Date" Type="datetime" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="In_Quantity" Type="int" />
+          <Property Name="Remaining_Quantity" Type="int" />
+          <Property Name="Expiry_Date" Type="date" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Inventory_IN_Request_Items">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Item_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_ID" Type="int" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Inventory_IN_Requests">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Trader_ID" Type="int" />
+          <Property Name="Request_Date" Type="date" />
+          <Property Name="Is_Completed" Type="bit" />
+          <Property Name="User_Completed" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Completed" Type="datetime" />
+          <Property Name="Request_No" Type="varchar" MaxLength="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Inventory_Out">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Transaction_Date" Type="datetime" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Out_Quantity" Type="int" />
+          <Property Name="Out_Reason_ID" Type="int" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Inventory_Out_Reasons">
+          <Key>
+            <PropertyRef Name="Reason_ID" />
+          </Key>
+          <Property Name="Reason_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Inventory_Transfer_Items">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Item_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Transfer_ID" Type="int" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Transfer_Quantity" Type="int" />
+          <Property Name="Is_Accepted" Type="bit" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+          <Property Name="User_Accepted" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Accepted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Inventory_Transfers">
+          <Key>
+            <PropertyRef Name="Transafer_ID" />
+          </Key>
+          <Property Name="Transafer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From_Branch_ID" Type="int" />
+          <Property Name="To_Branch_ID" Type="int" />
+          <Property Name="Transfer_Date" Type="date" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Transfer_No" Type="varchar" MaxLength="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Invoice_Details">
+          <Key>
+            <PropertyRef Name="Detail_ID" />
+          </Key>
+          <Property Name="Detail_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoice_ID" Type="int" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Bracode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Unit_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Management_Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Company_Commission" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Trader_Portion" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Selling_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Tax" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Net_Price" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoice_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numeric_Invoice_No" Type="int" />
+          <Property Name="Invoice_Date" Type="datetime" />
+          <Property Name="Management_Discount_ID" Type="int" />
+          <Property Name="Total_Sales" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Tax" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Products_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Management_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Cash" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SPAN" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Credit_Card" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="Cashier_ID" Type="int" />
+          <Property Name="QR_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Net_Sales" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Date_Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LanguageWords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="English" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Arabic" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Management_Discounts">
+          <Key>
+            <PropertyRef Name="Discount_ID" />
+          </Key>
+          <Property Name="Discount_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Discount_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discount_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Doscount_Percentage" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="From_Date" Type="datetime" />
+          <Property Name="To_Date" Type="datetime" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Payment_Types">
+          <Key>
+            <PropertyRef Name="Payment_Type_ID" />
+          </Key>
+          <Property Name="Payment_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment_Type_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Trader_ID" Type="int" />
+          <Property Name="Bank_ID" Type="int" />
+          <Property Name="Payment_Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Payment_Date" Type="date" />
+          <Property Name="Details" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="Is_Completed" Type="bit" />
+          <Property Name="Payment_Type_ID" Type="int" />
+          <Property Name="Payment_Ref" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Page_Code" />
+          </Key>
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="Page_Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Ratings">
+          <Key>
+            <PropertyRef Name="Rating_ID" />
+          </Key>
+          <Property Name="Rating_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Detail_ID" Type="int" />
+          <Property Name="Taste_Eval" Type="int" />
+          <Property Name="Shape_Eval" Type="int" />
+          <Property Name="Price_Eval" Type="int" />
+          <Property Name="Rating_Datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category_ID" Type="int" />
+          <Property Name="Trader_ID" Type="int" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_Image" Type="image" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Saving_Method_ID" Type="int" />
+          <Property Name="Validity_Days" Type="int" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Refund">
+          <Key>
+            <PropertyRef Name="Refund_ID" />
+          </Key>
+          <Property Name="Refund_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Original_Sales_Invoice_ID" Type="int" />
+          <Property Name="Refund_Date" Type="datetime" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="Cashier_ID" Type="int" />
+          <Property Name="Total_Taxes" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Refunded" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Refund_Details">
+          <Key>
+            <PropertyRef Name="Details_ID" />
+          </Key>
+          <Property Name="Details_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Refund_ID" Type="int" />
+          <Property Name="Sub_Product_ID" Type="int" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tax" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Refunded_Quantity" Type="int" />
+          <Property Name="Trader_Portion" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Company_Commission" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Management_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Net_Refunded" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Saving_Methods">
+          <Key>
+            <PropertyRef Name="Method_ID" />
+          </Key>
+          <Property Name="Method_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Method_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sub_Product_Branches">
+          <Key>
+            <PropertyRef Name="Product_Branch_ID" />
+          </Key>
+          <Property Name="Product_Branch_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Branch_ID" Type="int" Nullable="false" />
+          <Property Name="Sub_Product_ID" Type="int" Nullable="false" />
+          <Property Name="Available_Amount" Type="int" />
+        </EntityType>
+        <EntityType Name="Sub_Products">
+          <Key>
+            <PropertyRef Name="Sub_Product_ID" />
+          </Key>
+          <Property Name="Sub_Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Product_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Barcode" Type="nchar" MaxLength="10" />
+          <Property Name="Product_ID" Type="int" />
+          <Property Name="Sub_Product_Image" Type="image" />
+          <Property Name="Sub_Product_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Commission" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Selling_Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Discount_Type" Type="smallint" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="Commission_Type" Type="smallint" />
+          <Property Name="Available_Amount" Type="int" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="System_Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Full_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="User_Type_ID" Type="int" />
+          <Property Name="User_Created" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Created" Type="datetime" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Tax_ID" />
+          </Key>
+          <Property Name="Tax_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tax_Percentage" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="Is_Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Traders">
+          <Key>
+            <PropertyRef Name="Trader_ID" />
+          </Key>
+          <Property Name="Trader_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Trader_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Full_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Of_Birth" Type="nvarchar" MaxLength="50" />
+          <Property Name="City_ID" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="National_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Type" Type="int" />
+          <Property Name="Issue_Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Issue_Place" Type="nvarchar" MaxLength="50" />
+          <Property Name="Experiences" Type="nvarchar" MaxLength="150" />
+          <Property Name="Bank_ID" Type="int" />
+          <Property Name="IBAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="Commercial_License_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bank_Account_Holder" Type="nvarchar" MaxLength="150" />
+          <Property Name="Store_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Maarof" Type="nvarchar" MaxLength="50" />
+          <Property Name="Instegram" Type="nvarchar" MaxLength="50" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="50" />
+          <Property Name="Snapchat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile_Verified" Type="bit" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Email_Verified" Type="bit" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Updated" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="datetime" />
+          <Property Name="is_Registration_Completed" Type="bit" />
+        </EntityType>
+        <EntityType Name="User_Types">
+          <Key>
+            <PropertyRef Name="User_Type_ID" />
+          </Key>
+          <Property Name="User_Type_ID" Type="int" Nullable="false" />
+          <Property Name="User_Type_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Branches_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Branches" Type="Self.Branches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Branches">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashier_Device_Cashier_Key">
+          <End Role="Cashier_Key" Type="Self.Cashier_Key" Multiplicity="1" />
+          <End Role="Cashier_Device" Type="Self.Cashier_Device" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier_Key">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Cashier_Device">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashier_Key_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="1" />
+          <End Role="Cashier_Key" Type="Self.Cashier_Key" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Cashier_Key">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashiers_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Cashiers">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_Opening_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Daily_Balance" Type="Self.Daily_Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Daily_Balance">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_Opening_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="1" />
+          <End Role="Daily_Balance" Type="Self.Daily_Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Daily_Balance">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_In_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Inventory_In" Type="Self.Inventory_In" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_In">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Request_Items_Inventory_IN_Requests">
+          <End Role="Inventory_IN_Requests" Type="Self.Inventory_IN_Requests" Multiplicity="0..1" />
+          <End Role="Inventory_IN_Request_Items" Type="Self.Inventory_IN_Request_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_IN_Requests">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Request_Items">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Request_Items_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="0..1" />
+          <End Role="Inventory_IN_Request_Items" Type="Self.Inventory_IN_Request_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Request_Items">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Requests_Traders">
+          <End Role="Traders" Type="Self.Traders" Multiplicity="0..1" />
+          <End Role="Inventory_IN_Requests" Type="Self.Inventory_IN_Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traders">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Requests">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_In_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="0..1" />
+          <End Role="Inventory_In" Type="Self.Inventory_In" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_In">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Inventory_Out" Type="Self.Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Inventory_Out_Reasons">
+          <End Role="Inventory_Out_Reasons" Type="Self.Inventory_Out_Reasons" Multiplicity="0..1" />
+          <End Role="Inventory_Out" Type="Self.Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Out_Reasons">
+              <PropertyRef Name="Reason_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Out_Reason_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="0..1" />
+          <End Role="Inventory_Out" Type="Self.Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfer_Items_Inventory_Transfers">
+          <End Role="Inventory_Transfers" Type="Self.Inventory_Transfers" Multiplicity="0..1" />
+          <End Role="Inventory_Transfer_Items" Type="Self.Inventory_Transfer_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Transfers">
+              <PropertyRef Name="Transafer_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfer_Items">
+              <PropertyRef Name="Transfer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfers_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Inventory_Transfers" Type="Self.Inventory_Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfers">
+              <PropertyRef Name="From_Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfers_Branches1">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Inventory_Transfers" Type="Self.Inventory_Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfers">
+              <PropertyRef Name="To_Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Details_Invoices">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1" />
+          <End Role="Invoice_Details" Type="Self.Invoice_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Invoice_Details">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Details_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="0..1" />
+          <End Role="Invoice_Details" Type="Self.Invoice_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Invoice_Details">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Discount_Codes">
+          <End Role="Management_Discounts" Type="Self.Management_Discounts" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Management_Discounts">
+              <PropertyRef Name="Discount_ID" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="Management_Discount_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Bank_ID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Bank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Payment_Types">
+          <End Role="Payment_Types" Type="Self.Payment_Types" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_Types">
+              <PropertyRef Name="Payment_Type_ID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Payment_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Traders">
+          <End Role="Traders" Type="Self.Traders" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traders">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ratings_Invoice_Details">
+          <End Role="Invoice_Details" Type="Self.Invoice_Details" Multiplicity="0..1" />
+          <End Role="Product_Ratings" Type="Self.Product_Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice_Details">
+              <PropertyRef Name="Detail_ID" />
+            </Principal>
+            <Dependent Role="Product_Ratings">
+              <PropertyRef Name="Detail_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Saving_Methods">
+          <End Role="Saving_Methods" Type="Self.Saving_Methods" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saving_Methods">
+              <PropertyRef Name="Method_ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Saving_Method_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Traders">
+          <End Role="Traders" Type="Self.Traders" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traders">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Refund" Type="Self.Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Cashiers">
+          <End Role="Cashiers" Type="Self.Cashiers" Multiplicity="0..1" />
+          <End Role="Refund" Type="Self.Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashiers">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Details_Refund">
+          <End Role="Refund" Type="Self.Refund" Multiplicity="0..1" />
+          <End Role="Refund_Details" Type="Self.Refund_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refund">
+              <PropertyRef Name="Refund_ID" />
+            </Principal>
+            <Dependent Role="Refund_Details">
+              <PropertyRef Name="Refund_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Details_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="0..1" />
+          <End Role="Refund_Details" Type="Self.Refund_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Refund_Details">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Invoices">
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="0..1" />
+          <End Role="Refund" Type="Self.Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Original_Sales_Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Product_Branches_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="Sub_Product_Branches" Type="Self.Sub_Product_Branches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Sub_Product_Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Product_Branches_Sub_Products">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="1" />
+          <End Role="Sub_Product_Branches" Type="Self.Sub_Product_Branches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Product_Branches">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Products_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_System_Users_User_Types">
+          <End Role="User_Types" Type="Self.User_Types" Multiplicity="0..1" />
+          <End Role="System_Users" Type="Self.System_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Types">
+              <PropertyRef Name="User_Type_ID" />
+            </Principal>
+            <Dependent Role="System_Users">
+              <PropertyRef Name="User_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="Traders" Type="Self.Traders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Bank_ID" />
+            </Principal>
+            <Dependent Role="Traders">
+              <PropertyRef Name="Bank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Traders" Type="Self.Traders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Traders">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_ID_Types">
+          <End Role="ID_Types" Type="Self.ID_Types" Multiplicity="0..1" />
+          <End Role="Traders" Type="Self.Traders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ID_Types">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="Traders">
+              <PropertyRef Name="ID_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elaunch_pos2ModelStoreContainer">
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cashier_Device" EntityType="Self.Cashier_Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cashier_Key" EntityType="Self.Cashier_Key" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cashiers" EntityType="Self.Cashiers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Daily_Balance" EntityType="Self.Daily_Balance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ID_Types" EntityType="Self.ID_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_In" EntityType="Self.Inventory_In" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_IN_Request_Items" EntityType="Self.Inventory_IN_Request_Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_IN_Requests" EntityType="Self.Inventory_IN_Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_Out" EntityType="Self.Inventory_Out" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_Out_Reasons" EntityType="Self.Inventory_Out_Reasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_Transfer_Items" EntityType="Self.Inventory_Transfer_Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory_Transfers" EntityType="Self.Inventory_Transfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice_Details" EntityType="Self.Invoice_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageWords" EntityType="Self.LanguageWords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Management_Discounts" EntityType="Self.Management_Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_Types" EntityType="Self.Payment_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Ratings" EntityType="Self.Product_Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Refund" EntityType="Self.Refund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Refund_Details" EntityType="Self.Refund_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Saving_Methods" EntityType="Self.Saving_Methods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Product_Branches" EntityType="Self.Sub_Product_Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Products" EntityType="Self.Sub_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="System_Users" EntityType="Self.System_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Traders" EntityType="Self.Traders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Types" EntityType="Self.User_Types" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Branches_Cities" Association="Self.FK_Branches_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Branches" EntitySet="Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashier_Device_Cashier_Key" Association="Self.FK_Cashier_Device_Cashier_Key">
+            <End Role="Cashier_Key" EntitySet="Cashier_Key" />
+            <End Role="Cashier_Device" EntitySet="Cashier_Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashier_Key_Cashiers" Association="Self.FK_Cashier_Key_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="Cashier_Key" EntitySet="Cashier_Key" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashiers_Branches" Association="Self.FK_Cashiers_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Cashiers" EntitySet="Cashiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_Opening_Branches" Association="Self.FK_Daily_Opening_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Daily_Balance" EntitySet="Daily_Balance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_Opening_Cashiers" Association="Self.FK_Daily_Opening_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="Daily_Balance" EntitySet="Daily_Balance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_In_Branches" Association="Self.FK_Inventory_In_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Inventory_In" EntitySet="Inventory_In" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Request_Items_Inventory_IN_Requests" Association="Self.FK_Inventory_IN_Request_Items_Inventory_IN_Requests">
+            <End Role="Inventory_IN_Requests" EntitySet="Inventory_IN_Requests" />
+            <End Role="Inventory_IN_Request_Items" EntitySet="Inventory_IN_Request_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Request_Items_Sub_Products" Association="Self.FK_Inventory_IN_Request_Items_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_IN_Request_Items" EntitySet="Inventory_IN_Request_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Requests_Traders" Association="Self.FK_Inventory_IN_Requests_Traders">
+            <End Role="Traders" EntitySet="Traders" />
+            <End Role="Inventory_IN_Requests" EntitySet="Inventory_IN_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_In_Sub_Products" Association="Self.FK_Inventory_In_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_In" EntitySet="Inventory_In" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Branches" Association="Self.FK_Inventory_Out_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Inventory_Out_Reasons" Association="Self.FK_Inventory_Out_Inventory_Out_Reasons">
+            <End Role="Inventory_Out_Reasons" EntitySet="Inventory_Out_Reasons" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Sub_Products" Association="Self.FK_Inventory_Out_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfer_Items_Inventory_Transfers" Association="Self.FK_Inventory_Transfer_Items_Inventory_Transfers">
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+            <End Role="Inventory_Transfer_Items" EntitySet="Inventory_Transfer_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfers_Branches" Association="Self.FK_Inventory_Transfers_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfers_Branches1" Association="Self.FK_Inventory_Transfers_Branches1">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Details_Invoices" Association="Self.FK_Invoice_Details_Invoices">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Details_Sub_Products" Association="Self.FK_Invoice_Details_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Branches" Association="Self.FK_Invoices_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Cashiers" Association="Self.FK_Invoices_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Discount_Codes" Association="Self.FK_Invoices_Discount_Codes">
+            <End Role="Management_Discounts" EntitySet="Management_Discounts" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Banks" Association="Self.FK_Payments_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Payment_Types" Association="Self.FK_Payments_Payment_Types">
+            <End Role="Payment_Types" EntitySet="Payment_Types" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Traders" Association="Self.FK_Payments_Traders">
+            <End Role="Traders" EntitySet="Traders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ratings_Invoice_Details" Association="Self.FK_Product_Ratings_Invoice_Details">
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+            <End Role="Product_Ratings" EntitySet="Product_Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Saving_Methods" Association="Self.FK_Products_Saving_Methods">
+            <End Role="Saving_Methods" EntitySet="Saving_Methods" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Traders" Association="Self.FK_Products_Traders">
+            <End Role="Traders" EntitySet="Traders" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Branches" Association="Self.FK_Refund_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Refund" EntitySet="Refund" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Cashiers" Association="Self.FK_Refund_Cashiers">
+            <End Role="Cashiers" EntitySet="Cashiers" />
+            <End Role="Refund" EntitySet="Refund" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Details_Refund" Association="Self.FK_Refund_Details_Refund">
+            <End Role="Refund" EntitySet="Refund" />
+            <End Role="Refund_Details" EntitySet="Refund_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Details_Sub_Products" Association="Self.FK_Refund_Details_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Refund_Details" EntitySet="Refund_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Invoices" Association="Self.FK_Refund_Invoices">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Refund" EntitySet="Refund" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Product_Branches_Branches" Association="Self.FK_Sub_Product_Branches_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Sub_Product_Branches" EntitySet="Sub_Product_Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Product_Branches_Sub_Products" Association="Self.FK_Sub_Product_Branches_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Sub_Product_Branches" EntitySet="Sub_Product_Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Products_Products" Association="Self.FK_Sub_Products_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_System_Users_User_Types" Association="Self.FK_System_Users_User_Types">
+            <End Role="User_Types" EntitySet="User_Types" />
+            <End Role="System_Users" EntitySet="System_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_Banks" Association="Self.FK_Traders_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Traders" EntitySet="Traders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_Cities" Association="Self.FK_Traders_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Traders" EntitySet="Traders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_ID_Types" Association="Self.FK_Traders_ID_Types">
+            <End Role="ID_Types" EntitySet="ID_Types" />
+            <End Role="Traders" EntitySet="Traders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="elaunch_pos2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="elaunch_posEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banks" EntityType="elaunch_pos2Model.Bank" />
+          <EntitySet Name="Branches" EntityType="elaunch_pos2Model.Branch" />
+          <EntitySet Name="Cashier_Device" EntityType="elaunch_pos2Model.Cashier_Device" />
+          <EntitySet Name="Cashier_Key" EntityType="elaunch_pos2Model.Cashier_Key" />
+          <EntitySet Name="Cashiers" EntityType="elaunch_pos2Model.Cashier" />
+          <EntitySet Name="Categories" EntityType="elaunch_pos2Model.Category" />
+          <EntitySet Name="Cities" EntityType="elaunch_pos2Model.City" />
+          <EntitySet Name="Daily_Balance" EntityType="elaunch_pos2Model.Daily_Balance" />
+          <EntitySet Name="ID_Types" EntityType="elaunch_pos2Model.ID_Types" />
+          <EntitySet Name="Inventory_In" EntityType="elaunch_pos2Model.Inventory_In" />
+          <EntitySet Name="Inventory_IN_Request_Items" EntityType="elaunch_pos2Model.Inventory_IN_Request_Items" />
+          <EntitySet Name="Inventory_IN_Requests" EntityType="elaunch_pos2Model.Inventory_IN_Requests" />
+          <EntitySet Name="Inventory_Out" EntityType="elaunch_pos2Model.Inventory_Out" />
+          <EntitySet Name="Inventory_Out_Reasons" EntityType="elaunch_pos2Model.Inventory_Out_Reasons" />
+          <EntitySet Name="Inventory_Transfer_Items" EntityType="elaunch_pos2Model.Inventory_Transfer_Items" />
+          <EntitySet Name="Inventory_Transfers" EntityType="elaunch_pos2Model.Inventory_Transfers" />
+          <EntitySet Name="Invoice_Details" EntityType="elaunch_pos2Model.Invoice_Details" />
+          <EntitySet Name="Invoices" EntityType="elaunch_pos2Model.Invoice" />
+          <EntitySet Name="LanguageWords" EntityType="elaunch_pos2Model.LanguageWord" />
+          <EntitySet Name="Management_Discounts" EntityType="elaunch_pos2Model.Management_Discounts" />
+          <EntitySet Name="Payment_Types" EntityType="elaunch_pos2Model.Payment_Types" />
+          <EntitySet Name="Payments" EntityType="elaunch_pos2Model.Payment" />
+          <EntitySet Name="Permissions" EntityType="elaunch_pos2Model.Permission" />
+          <EntitySet Name="Product_Ratings" EntityType="elaunch_pos2Model.Product_Ratings" />
+          <EntitySet Name="Products" EntityType="elaunch_pos2Model.Product" />
+          <EntitySet Name="Refunds" EntityType="elaunch_pos2Model.Refund" />
+          <EntitySet Name="Refund_Details" EntityType="elaunch_pos2Model.Refund_Details" />
+          <EntitySet Name="Saving_Methods" EntityType="elaunch_pos2Model.Saving_Methods" />
+          <EntitySet Name="Sub_Product_Branches" EntityType="elaunch_pos2Model.Sub_Product_Branches" />
+          <EntitySet Name="Sub_Products" EntityType="elaunch_pos2Model.Sub_Products" />
+          <EntitySet Name="System_Users" EntityType="elaunch_pos2Model.System_Users" />
+          <EntitySet Name="Taxes" EntityType="elaunch_pos2Model.Tax" />
+          <EntitySet Name="Traders" EntityType="elaunch_pos2Model.Trader" />
+          <EntitySet Name="User_Types" EntityType="elaunch_pos2Model.User_Types" />
+          <AssociationSet Name="FK_Payments_Banks" Association="elaunch_pos2Model.FK_Payments_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_Banks" Association="elaunch_pos2Model.FK_Traders_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Trader" EntitySet="Traders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Branches_Cities" Association="elaunch_pos2Model.FK_Branches_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Branch" EntitySet="Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashiers_Branches" Association="elaunch_pos2Model.FK_Cashiers_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Cashier" EntitySet="Cashiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_Opening_Branches" Association="elaunch_pos2Model.FK_Daily_Opening_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Daily_Balance" EntitySet="Daily_Balance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_In_Branches" Association="elaunch_pos2Model.FK_Inventory_In_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Inventory_In" EntitySet="Inventory_In" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Branches" Association="elaunch_pos2Model.FK_Inventory_Out_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfers_Branches" Association="elaunch_pos2Model.FK_Inventory_Transfers_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfers_Branches1" Association="elaunch_pos2Model.FK_Inventory_Transfers_Branches1">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Branches" Association="elaunch_pos2Model.FK_Invoices_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Branches" Association="elaunch_pos2Model.FK_Refund_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Refund" EntitySet="Refunds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Product_Branches_Branches" Association="elaunch_pos2Model.FK_Sub_Product_Branches_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Sub_Product_Branches" EntitySet="Sub_Product_Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashier_Device_Cashier_Key" Association="elaunch_pos2Model.FK_Cashier_Device_Cashier_Key">
+            <End Role="Cashier_Key" EntitySet="Cashier_Key" />
+            <End Role="Cashier_Device" EntitySet="Cashier_Device" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cashier_Key_Cashiers" Association="elaunch_pos2Model.FK_Cashier_Key_Cashiers">
+            <End Role="Cashier" EntitySet="Cashiers" />
+            <End Role="Cashier_Key" EntitySet="Cashier_Key" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_Opening_Cashiers" Association="elaunch_pos2Model.FK_Daily_Opening_Cashiers">
+            <End Role="Cashier" EntitySet="Cashiers" />
+            <End Role="Daily_Balance" EntitySet="Daily_Balance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Cashiers" Association="elaunch_pos2Model.FK_Invoices_Cashiers">
+            <End Role="Cashier" EntitySet="Cashiers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Cashiers" Association="elaunch_pos2Model.FK_Refund_Cashiers">
+            <End Role="Cashier" EntitySet="Cashiers" />
+            <End Role="Refund" EntitySet="Refunds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="elaunch_pos2Model.FK_Products_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_Cities" Association="elaunch_pos2Model.FK_Traders_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Trader" EntitySet="Traders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traders_ID_Types" Association="elaunch_pos2Model.FK_Traders_ID_Types">
+            <End Role="ID_Types" EntitySet="ID_Types" />
+            <End Role="Trader" EntitySet="Traders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_In_Sub_Products" Association="elaunch_pos2Model.FK_Inventory_In_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_In" EntitySet="Inventory_In" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Request_Items_Inventory_IN_Requests" Association="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Inventory_IN_Requests">
+            <End Role="Inventory_IN_Requests" EntitySet="Inventory_IN_Requests" />
+            <End Role="Inventory_IN_Request_Items" EntitySet="Inventory_IN_Request_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Request_Items_Sub_Products" Association="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_IN_Request_Items" EntitySet="Inventory_IN_Request_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_IN_Requests_Traders" Association="elaunch_pos2Model.FK_Inventory_IN_Requests_Traders">
+            <End Role="Trader" EntitySet="Traders" />
+            <End Role="Inventory_IN_Requests" EntitySet="Inventory_IN_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Inventory_Out_Reasons" Association="elaunch_pos2Model.FK_Inventory_Out_Inventory_Out_Reasons">
+            <End Role="Inventory_Out_Reasons" EntitySet="Inventory_Out_Reasons" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Out_Sub_Products" Association="elaunch_pos2Model.FK_Inventory_Out_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Inventory_Out" EntitySet="Inventory_Out" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Transfer_Items_Inventory_Transfers" Association="elaunch_pos2Model.FK_Inventory_Transfer_Items_Inventory_Transfers">
+            <End Role="Inventory_Transfers" EntitySet="Inventory_Transfers" />
+            <End Role="Inventory_Transfer_Items" EntitySet="Inventory_Transfer_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Details_Invoices" Association="elaunch_pos2Model.FK_Invoice_Details_Invoices">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Details_Sub_Products" Association="elaunch_pos2Model.FK_Invoice_Details_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Ratings_Invoice_Details" Association="elaunch_pos2Model.FK_Product_Ratings_Invoice_Details">
+            <End Role="Invoice_Details" EntitySet="Invoice_Details" />
+            <End Role="Product_Ratings" EntitySet="Product_Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoices_Discount_Codes" Association="elaunch_pos2Model.FK_Invoices_Discount_Codes">
+            <End Role="Management_Discounts" EntitySet="Management_Discounts" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Invoices" Association="elaunch_pos2Model.FK_Refund_Invoices">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Refund" EntitySet="Refunds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Payment_Types" Association="elaunch_pos2Model.FK_Payments_Payment_Types">
+            <End Role="Payment_Types" EntitySet="Payment_Types" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Traders" Association="elaunch_pos2Model.FK_Payments_Traders">
+            <End Role="Trader" EntitySet="Traders" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Saving_Methods" Association="elaunch_pos2Model.FK_Products_Saving_Methods">
+            <End Role="Saving_Methods" EntitySet="Saving_Methods" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Traders" Association="elaunch_pos2Model.FK_Products_Traders">
+            <End Role="Trader" EntitySet="Traders" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Products_Products" Association="elaunch_pos2Model.FK_Sub_Products_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Details_Refund" Association="elaunch_pos2Model.FK_Refund_Details_Refund">
+            <End Role="Refund" EntitySet="Refunds" />
+            <End Role="Refund_Details" EntitySet="Refund_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refund_Details_Sub_Products" Association="elaunch_pos2Model.FK_Refund_Details_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Refund_Details" EntitySet="Refund_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sub_Product_Branches_Sub_Products" Association="elaunch_pos2Model.FK_Sub_Product_Branches_Sub_Products">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Sub_Product_Branches" EntitySet="Sub_Product_Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_System_Users_User_Types" Association="elaunch_pos2Model.FK_System_Users_User_Types">
+            <End Role="User_Types" EntitySet="User_Types" />
+            <End Role="System_Users" EntitySet="System_Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Bank_ID" />
+          </Key>
+          <Property Name="Bank_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bank_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="elaunch_pos2Model.FK_Payments_Banks" FromRole="Bank" ToRole="Payment" />
+          <NavigationProperty Name="Traders" Relationship="elaunch_pos2Model.FK_Traders_Banks" FromRole="Bank" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Branch_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City_ID" Type="Int32" />
+          <Property Name="Latitude" Type="Decimal" Precision="15" Scale="11" />
+          <Property Name="Longitude" Type="Decimal" Precision="15" Scale="11" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="City" Relationship="elaunch_pos2Model.FK_Branches_Cities" FromRole="Branch" ToRole="City" />
+          <NavigationProperty Name="Cashiers" Relationship="elaunch_pos2Model.FK_Cashiers_Branches" FromRole="Branch" ToRole="Cashier" />
+          <NavigationProperty Name="Daily_Balance" Relationship="elaunch_pos2Model.FK_Daily_Opening_Branches" FromRole="Branch" ToRole="Daily_Balance" />
+          <NavigationProperty Name="Inventory_In" Relationship="elaunch_pos2Model.FK_Inventory_In_Branches" FromRole="Branch" ToRole="Inventory_In" />
+          <NavigationProperty Name="Inventory_Out" Relationship="elaunch_pos2Model.FK_Inventory_Out_Branches" FromRole="Branch" ToRole="Inventory_Out" />
+          <NavigationProperty Name="Inventory_Transfers" Relationship="elaunch_pos2Model.FK_Inventory_Transfers_Branches" FromRole="Branch" ToRole="Inventory_Transfers" />
+          <NavigationProperty Name="Inventory_Transfers1" Relationship="elaunch_pos2Model.FK_Inventory_Transfers_Branches1" FromRole="Branch" ToRole="Inventory_Transfers" />
+          <NavigationProperty Name="Invoices" Relationship="elaunch_pos2Model.FK_Invoices_Branches" FromRole="Branch" ToRole="Invoice" />
+          <NavigationProperty Name="Refunds" Relationship="elaunch_pos2Model.FK_Refund_Branches" FromRole="Branch" ToRole="Refund" />
+          <NavigationProperty Name="Sub_Product_Branches" Relationship="elaunch_pos2Model.FK_Sub_Product_Branches_Branches" FromRole="Branch" ToRole="Sub_Product_Branches" />
+        </EntityType>
+        <EntityType Name="Cashier_Device">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="Int32" Nullable="false" />
+          <Property Name="Device_Type" Type="Byte" />
+          <Property Name="Device_Token" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cashier_Key" Relationship="elaunch_pos2Model.FK_Cashier_Device_Cashier_Key" FromRole="Cashier_Device" ToRole="Cashier_Key" />
+        </EntityType>
+        <EntityType Name="Cashier_Key">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="Int32" Nullable="false" />
+          <Property Name="API_Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cashier_Device" Relationship="elaunch_pos2Model.FK_Cashier_Device_Cashier_Key" FromRole="Cashier_Key" ToRole="Cashier_Device" />
+          <NavigationProperty Name="Cashier" Relationship="elaunch_pos2Model.FK_Cashier_Key_Cashiers" FromRole="Cashier_Key" ToRole="Cashier" />
+        </EntityType>
+        <EntityType Name="Cashier">
+          <Key>
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Cashier_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cashiers_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="Cashier_Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Refund_PIN_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PIN_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="Is_Logged_In" Type="Boolean" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Cashiers_Branches" FromRole="Cashier" ToRole="Branch" />
+          <NavigationProperty Name="Cashier_Key" Relationship="elaunch_pos2Model.FK_Cashier_Key_Cashiers" FromRole="Cashier" ToRole="Cashier_Key" />
+          <NavigationProperty Name="Daily_Balance" Relationship="elaunch_pos2Model.FK_Daily_Opening_Cashiers" FromRole="Cashier" ToRole="Daily_Balance" />
+          <NavigationProperty Name="Invoices" Relationship="elaunch_pos2Model.FK_Invoices_Cashiers" FromRole="Cashier" ToRole="Invoice" />
+          <NavigationProperty Name="Refunds" Relationship="elaunch_pos2Model.FK_Refund_Cashiers" FromRole="Cashier" ToRole="Refund" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="elaunch_pos2Model.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Branches" Relationship="elaunch_pos2Model.FK_Branches_Cities" FromRole="City" ToRole="Branch" />
+          <NavigationProperty Name="Traders" Relationship="elaunch_pos2Model.FK_Traders_Cities" FromRole="City" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Daily_Balance">
+          <Key>
+            <PropertyRef Name="Balance_Date" />
+            <PropertyRef Name="Cashier_ID" />
+          </Key>
+          <Property Name="Balance_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cashier_ID" Type="Int32" Nullable="false" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="Opening_Value" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Closing_Value" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Daily_Opening_Branches" FromRole="Daily_Balance" ToRole="Branch" />
+          <NavigationProperty Name="Cashier" Relationship="elaunch_pos2Model.FK_Daily_Opening_Cashiers" FromRole="Daily_Balance" ToRole="Cashier" />
+        </EntityType>
+        <EntityType Name="ID_Types">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Traders" Relationship="elaunch_pos2Model.FK_Traders_ID_Types" FromRole="ID_Types" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Inventory_In">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="In_Quantity" Type="Int32" />
+          <Property Name="Remaining_Quantity" Type="Int32" />
+          <Property Name="Expiry_Date" Type="DateTime" Precision="0" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Inventory_In_Branches" FromRole="Inventory_In" ToRole="Branch" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Inventory_In_Sub_Products" FromRole="Inventory_In" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Inventory_IN_Request_Items">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Item_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Request_ID" Type="Int32" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Inventory_IN_Requests" Relationship="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Inventory_IN_Requests" FromRole="Inventory_IN_Request_Items" ToRole="Inventory_IN_Requests" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Sub_Products" FromRole="Inventory_IN_Request_Items" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Inventory_IN_Requests">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trader_ID" Type="Int32" />
+          <Property Name="Request_Date" Type="DateTime" Precision="0" />
+          <Property Name="Is_Completed" Type="Boolean" />
+          <Property Name="User_Completed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Completed" Type="DateTime" Precision="3" />
+          <Property Name="Request_No" Type="String" MaxLength="7" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Inventory_IN_Request_Items" Relationship="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Inventory_IN_Requests" FromRole="Inventory_IN_Requests" ToRole="Inventory_IN_Request_Items" />
+          <NavigationProperty Name="Trader" Relationship="elaunch_pos2Model.FK_Inventory_IN_Requests_Traders" FromRole="Inventory_IN_Requests" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Inventory_Out">
+          <Key>
+            <PropertyRef Name="Transaction_ID" />
+          </Key>
+          <Property Name="Transaction_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Out_Quantity" Type="Int32" />
+          <Property Name="Out_Reason_ID" Type="Int32" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Inventory_Out_Branches" FromRole="Inventory_Out" ToRole="Branch" />
+          <NavigationProperty Name="Inventory_Out_Reasons" Relationship="elaunch_pos2Model.FK_Inventory_Out_Inventory_Out_Reasons" FromRole="Inventory_Out" ToRole="Inventory_Out_Reasons" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Inventory_Out_Sub_Products" FromRole="Inventory_Out" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Inventory_Out_Reasons">
+          <Key>
+            <PropertyRef Name="Reason_ID" />
+          </Key>
+          <Property Name="Reason_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <NavigationProperty Name="Inventory_Out" Relationship="elaunch_pos2Model.FK_Inventory_Out_Inventory_Out_Reasons" FromRole="Inventory_Out_Reasons" ToRole="Inventory_Out" />
+        </EntityType>
+        <EntityType Name="Inventory_Transfer_Items">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Item_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Transfer_ID" Type="Int32" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Transfer_Quantity" Type="Int32" />
+          <Property Name="Is_Accepted" Type="Boolean" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <Property Name="User_Accepted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Accepted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inventory_Transfers" Relationship="elaunch_pos2Model.FK_Inventory_Transfer_Items_Inventory_Transfers" FromRole="Inventory_Transfer_Items" ToRole="Inventory_Transfers" />
+        </EntityType>
+        <EntityType Name="Inventory_Transfers">
+          <Key>
+            <PropertyRef Name="Transafer_ID" />
+          </Key>
+          <Property Name="Transafer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From_Branch_ID" Type="Int32" />
+          <Property Name="To_Branch_ID" Type="Int32" />
+          <Property Name="Transfer_Date" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Transfer_No" Type="String" MaxLength="7" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Inventory_Transfers_Branches" FromRole="Inventory_Transfers" ToRole="Branch" />
+          <NavigationProperty Name="Branch1" Relationship="elaunch_pos2Model.FK_Inventory_Transfers_Branches1" FromRole="Inventory_Transfers" ToRole="Branch" />
+          <NavigationProperty Name="Inventory_Transfer_Items" Relationship="elaunch_pos2Model.FK_Inventory_Transfer_Items_Inventory_Transfers" FromRole="Inventory_Transfers" ToRole="Inventory_Transfer_Items" />
+        </EntityType>
+        <EntityType Name="Invoice_Details">
+          <Key>
+            <PropertyRef Name="Detail_ID" />
+          </Key>
+          <Property Name="Detail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_ID" Type="Int32" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Bracode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Unit_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Management_Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Company_Commission" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Trader_Portion" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Selling_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Tax" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Net_Price" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Invoice" Relationship="elaunch_pos2Model.FK_Invoice_Details_Invoices" FromRole="Invoice_Details" ToRole="Invoice" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Invoice_Details_Sub_Products" FromRole="Invoice_Details" ToRole="Sub_Products" />
+          <NavigationProperty Name="Product_Ratings" Relationship="elaunch_pos2Model.FK_Product_Ratings_Invoice_Details" FromRole="Invoice_Details" ToRole="Product_Ratings" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numeric_Invoice_No" Type="Int32" />
+          <Property Name="Invoice_Date" Type="DateTime" Precision="3" />
+          <Property Name="Management_Discount_ID" Type="Int32" />
+          <Property Name="Total_Sales" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Tax" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Products_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Management_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SPAN" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Credit_Card" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="Cashier_ID" Type="Int32" />
+          <Property Name="QR_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Net_Sales" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Invoices_Branches" FromRole="Invoice" ToRole="Branch" />
+          <NavigationProperty Name="Cashier" Relationship="elaunch_pos2Model.FK_Invoices_Cashiers" FromRole="Invoice" ToRole="Cashier" />
+          <NavigationProperty Name="Invoice_Details" Relationship="elaunch_pos2Model.FK_Invoice_Details_Invoices" FromRole="Invoice" ToRole="Invoice_Details" />
+          <NavigationProperty Name="Management_Discounts" Relationship="elaunch_pos2Model.FK_Invoices_Discount_Codes" FromRole="Invoice" ToRole="Management_Discounts" />
+          <NavigationProperty Name="Refunds" Relationship="elaunch_pos2Model.FK_Refund_Invoices" FromRole="Invoice" ToRole="Refund" />
+        </EntityType>
+        <EntityType Name="LanguageWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="English" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Arabic" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Management_Discounts">
+          <Key>
+            <PropertyRef Name="Discount_ID" />
+          </Key>
+          <Property Name="Discount_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Discount_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discount_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doscount_Percentage" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="From_Date" Type="DateTime" Precision="3" />
+          <Property Name="To_Date" Type="DateTime" Precision="3" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Invoices" Relationship="elaunch_pos2Model.FK_Invoices_Discount_Codes" FromRole="Management_Discounts" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Payment_Types">
+          <Key>
+            <PropertyRef Name="Payment_Type_ID" />
+          </Key>
+          <Property Name="Payment_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Payment_Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="elaunch_pos2Model.FK_Payments_Payment_Types" FromRole="Payment_Types" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trader_ID" Type="Int32" />
+          <Property Name="Bank_ID" Type="Int32" />
+          <Property Name="Payment_Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Payment_Date" Type="DateTime" Precision="0" />
+          <Property Name="Details" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Completed" Type="Boolean" />
+          <Property Name="Payment_Type_ID" Type="Int32" />
+          <Property Name="Payment_Ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Bank" Relationship="elaunch_pos2Model.FK_Payments_Banks" FromRole="Payment" ToRole="Bank" />
+          <NavigationProperty Name="Payment_Types" Relationship="elaunch_pos2Model.FK_Payments_Payment_Types" FromRole="Payment" ToRole="Payment_Types" />
+          <NavigationProperty Name="Trader" Relationship="elaunch_pos2Model.FK_Payments_Traders" FromRole="Payment" ToRole="Trader" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Page_Code" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="Page_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product_Ratings">
+          <Key>
+            <PropertyRef Name="Rating_ID" />
+          </Key>
+          <Property Name="Rating_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detail_ID" Type="Int32" />
+          <Property Name="Taste_Eval" Type="Int32" />
+          <Property Name="Shape_Eval" Type="Int32" />
+          <Property Name="Price_Eval" Type="Int32" />
+          <Property Name="Rating_Datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Invoice_Details" Relationship="elaunch_pos2Model.FK_Product_Ratings_Invoice_Details" FromRole="Product_Ratings" ToRole="Invoice_Details" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category_ID" Type="Int32" />
+          <Property Name="Trader_ID" Type="Int32" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Saving_Method_ID" Type="Int32" />
+          <Property Name="Validity_Days" Type="Int32" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="elaunch_pos2Model.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Saving_Methods" Relationship="elaunch_pos2Model.FK_Products_Saving_Methods" FromRole="Product" ToRole="Saving_Methods" />
+          <NavigationProperty Name="Trader" Relationship="elaunch_pos2Model.FK_Products_Traders" FromRole="Product" ToRole="Trader" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Sub_Products_Products" FromRole="Product" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Refund">
+          <Key>
+            <PropertyRef Name="Refund_ID" />
+          </Key>
+          <Property Name="Refund_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Original_Sales_Invoice_ID" Type="Int32" />
+          <Property Name="Refund_Date" Type="DateTime" Precision="3" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="Cashier_ID" Type="Int32" />
+          <Property Name="Total_Taxes" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Refunded" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Refund_Branches" FromRole="Refund" ToRole="Branch" />
+          <NavigationProperty Name="Cashier" Relationship="elaunch_pos2Model.FK_Refund_Cashiers" FromRole="Refund" ToRole="Cashier" />
+          <NavigationProperty Name="Invoice" Relationship="elaunch_pos2Model.FK_Refund_Invoices" FromRole="Refund" ToRole="Invoice" />
+          <NavigationProperty Name="Refund_Details" Relationship="elaunch_pos2Model.FK_Refund_Details_Refund" FromRole="Refund" ToRole="Refund_Details" />
+        </EntityType>
+        <EntityType Name="Refund_Details">
+          <Key>
+            <PropertyRef Name="Details_ID" />
+          </Key>
+          <Property Name="Details_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Refund_ID" Type="Int32" />
+          <Property Name="Sub_Product_ID" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tax" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Refunded_Quantity" Type="Int32" />
+          <Property Name="Trader_Portion" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Company_Commission" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Management_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Net_Refunded" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Refund" Relationship="elaunch_pos2Model.FK_Refund_Details_Refund" FromRole="Refund_Details" ToRole="Refund" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Refund_Details_Sub_Products" FromRole="Refund_Details" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Saving_Methods">
+          <Key>
+            <PropertyRef Name="Method_ID" />
+          </Key>
+          <Property Name="Method_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Method_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="elaunch_pos2Model.FK_Products_Saving_Methods" FromRole="Saving_Methods" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Sub_Product_Branches">
+          <Key>
+            <PropertyRef Name="Product_Branch_ID" />
+          </Key>
+          <Property Name="Product_Branch_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Branch_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Available_Amount" Type="Int32" />
+          <NavigationProperty Name="Branch" Relationship="elaunch_pos2Model.FK_Sub_Product_Branches_Branches" FromRole="Sub_Product_Branches" ToRole="Branch" />
+          <NavigationProperty Name="Sub_Products" Relationship="elaunch_pos2Model.FK_Sub_Product_Branches_Sub_Products" FromRole="Sub_Product_Branches" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Sub_Products">
+          <Key>
+            <PropertyRef Name="Sub_Product_ID" />
+          </Key>
+          <Property Name="Sub_Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Product_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Product_ID" Type="Int32" />
+          <Property Name="Sub_Product_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sub_Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Commission" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Selling_Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Product_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Discount_Type" Type="Int16" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="Commission_Type" Type="Int16" />
+          <Property Name="Available_Amount" Type="Int32" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inventory_In" Relationship="elaunch_pos2Model.FK_Inventory_In_Sub_Products" FromRole="Sub_Products" ToRole="Inventory_In" />
+          <NavigationProperty Name="Inventory_IN_Request_Items" Relationship="elaunch_pos2Model.FK_Inventory_IN_Request_Items_Sub_Products" FromRole="Sub_Products" ToRole="Inventory_IN_Request_Items" />
+          <NavigationProperty Name="Inventory_Out" Relationship="elaunch_pos2Model.FK_Inventory_Out_Sub_Products" FromRole="Sub_Products" ToRole="Inventory_Out" />
+          <NavigationProperty Name="Invoice_Details" Relationship="elaunch_pos2Model.FK_Invoice_Details_Sub_Products" FromRole="Sub_Products" ToRole="Invoice_Details" />
+          <NavigationProperty Name="Product" Relationship="elaunch_pos2Model.FK_Sub_Products_Products" FromRole="Sub_Products" ToRole="Product" />
+          <NavigationProperty Name="Refund_Details" Relationship="elaunch_pos2Model.FK_Refund_Details_Sub_Products" FromRole="Sub_Products" ToRole="Refund_Details" />
+          <NavigationProperty Name="Sub_Product_Branches" Relationship="elaunch_pos2Model.FK_Sub_Product_Branches_Sub_Products" FromRole="Sub_Products" ToRole="Sub_Product_Branches" />
+        </EntityType>
+        <EntityType Name="System_Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="User_Type_ID" Type="Int32" />
+          <Property Name="User_Created" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User_Types" Relationship="elaunch_pos2Model.FK_System_Users_User_Types" FromRole="System_Users" ToRole="User_Types" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Tax_ID" />
+          </Key>
+          <Property Name="Tax_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tax_Percentage" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Is_Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Trader">
+          <Key>
+            <PropertyRef Name="Trader_ID" />
+          </Key>
+          <Property Name="Trader_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trader_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Of_Birth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City_ID" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="National_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Type" Type="Int32" />
+          <Property Name="Issue_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Issue_Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Experiences" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Bank_ID" Type="Int32" />
+          <Property Name="IBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Commercial_License_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bank_Account_Holder" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Maarof" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Instegram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Snapchat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile_Verified" Type="Boolean" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Email_Verified" Type="Boolean" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Updated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="3" />
+          <Property Name="is_Registration_Completed" Type="Boolean" />
+          <NavigationProperty Name="Bank" Relationship="elaunch_pos2Model.FK_Traders_Banks" FromRole="Trader" ToRole="Bank" />
+          <NavigationProperty Name="City" Relationship="elaunch_pos2Model.FK_Traders_Cities" FromRole="Trader" ToRole="City" />
+          <NavigationProperty Name="ID_Types" Relationship="elaunch_pos2Model.FK_Traders_ID_Types" FromRole="Trader" ToRole="ID_Types" />
+          <NavigationProperty Name="Inventory_IN_Requests" Relationship="elaunch_pos2Model.FK_Inventory_IN_Requests_Traders" FromRole="Trader" ToRole="Inventory_IN_Requests" />
+          <NavigationProperty Name="Payments" Relationship="elaunch_pos2Model.FK_Payments_Traders" FromRole="Trader" ToRole="Payment" />
+          <NavigationProperty Name="Products" Relationship="elaunch_pos2Model.FK_Products_Traders" FromRole="Trader" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User_Types">
+          <Key>
+            <PropertyRef Name="User_Type_ID" />
+          </Key>
+          <Property Name="User_Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="System_Users" Relationship="elaunch_pos2Model.FK_System_Users_User_Types" FromRole="User_Types" ToRole="System_Users" />
+        </EntityType>
+        <Association Name="FK_Payments_Banks">
+          <End Type="elaunch_pos2Model.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Bank_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Bank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_Banks">
+          <End Type="elaunch_pos2Model.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Bank_ID" />
+            </Principal>
+            <Dependent Role="Trader">
+              <PropertyRef Name="Bank_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Branches_Cities">
+          <End Type="elaunch_pos2Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashiers_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Cashier" Role="Cashier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Cashier">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_Opening_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Daily_Balance" Role="Daily_Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Daily_Balance">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_In_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_In" Role="Inventory_In" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_In">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Out" Role="Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfers_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Transfers" Role="Inventory_Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfers">
+              <PropertyRef Name="From_Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfers_Branches1">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Transfers" Role="Inventory_Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfers">
+              <PropertyRef Name="To_Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Refund" Role="Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Product_Branches_Branches">
+          <End Type="elaunch_pos2Model.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="elaunch_pos2Model.Sub_Product_Branches" Role="Sub_Product_Branches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Sub_Product_Branches">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashier_Device_Cashier_Key">
+          <End Type="elaunch_pos2Model.Cashier_Key" Role="Cashier_Key" Multiplicity="1" />
+          <End Type="elaunch_pos2Model.Cashier_Device" Role="Cashier_Device" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier_Key">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Cashier_Device">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cashier_Key_Cashiers">
+          <End Type="elaunch_pos2Model.Cashier" Role="Cashier" Multiplicity="1" />
+          <End Type="elaunch_pos2Model.Cashier_Key" Role="Cashier_Key" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Cashier_Key">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_Opening_Cashiers">
+          <End Type="elaunch_pos2Model.Cashier" Role="Cashier" Multiplicity="1" />
+          <End Type="elaunch_pos2Model.Daily_Balance" Role="Daily_Balance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Daily_Balance">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Cashiers">
+          <End Type="elaunch_pos2Model.Cashier" Role="Cashier" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Cashiers">
+          <End Type="elaunch_pos2Model.Cashier" Role="Cashier" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Refund" Role="Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cashier">
+              <PropertyRef Name="Cashier_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Cashier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Type="elaunch_pos2Model.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_Cities">
+          <End Type="elaunch_pos2Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Trader">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traders_ID_Types">
+          <End Type="elaunch_pos2Model.ID_Types" Role="ID_Types" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ID_Types">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="Trader">
+              <PropertyRef Name="ID_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_In_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_In" Role="Inventory_In" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_In">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Request_Items_Inventory_IN_Requests">
+          <End Type="elaunch_pos2Model.Inventory_IN_Requests" Role="Inventory_IN_Requests" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_IN_Request_Items" Role="Inventory_IN_Request_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_IN_Requests">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Request_Items">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Request_Items_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_IN_Request_Items" Role="Inventory_IN_Request_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Request_Items">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_IN_Requests_Traders">
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_IN_Requests" Role="Inventory_IN_Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trader">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Inventory_IN_Requests">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Inventory_Out_Reasons">
+          <End Type="elaunch_pos2Model.Inventory_Out_Reasons" Role="Inventory_Out_Reasons" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Out" Role="Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Out_Reasons">
+              <PropertyRef Name="Reason_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Out_Reason_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Out_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Out" Role="Inventory_Out" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Out">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Transfer_Items_Inventory_Transfers">
+          <End Type="elaunch_pos2Model.Inventory_Transfers" Role="Inventory_Transfers" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Inventory_Transfer_Items" Role="Inventory_Transfer_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Transfers">
+              <PropertyRef Name="Transafer_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Transfer_Items">
+              <PropertyRef Name="Transfer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Details_Invoices">
+          <End Type="elaunch_pos2Model.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Invoice_Details" Role="Invoice_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Invoice_Details">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Details_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Invoice_Details" Role="Invoice_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Invoice_Details">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Ratings_Invoice_Details">
+          <End Type="elaunch_pos2Model.Invoice_Details" Role="Invoice_Details" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Product_Ratings" Role="Product_Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice_Details">
+              <PropertyRef Name="Detail_ID" />
+            </Principal>
+            <Dependent Role="Product_Ratings">
+              <PropertyRef Name="Detail_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoices_Discount_Codes">
+          <End Type="elaunch_pos2Model.Management_Discounts" Role="Management_Discounts" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Management_Discounts">
+              <PropertyRef Name="Discount_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Management_Discount_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Invoices">
+          <End Type="elaunch_pos2Model.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Refund" Role="Refund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Invoice_ID" />
+            </Principal>
+            <Dependent Role="Refund">
+              <PropertyRef Name="Original_Sales_Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Payment_Types">
+          <End Type="elaunch_pos2Model.Payment_Types" Role="Payment_Types" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_Types">
+              <PropertyRef Name="Payment_Type_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Payment_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Traders">
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trader">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Saving_Methods">
+          <End Type="elaunch_pos2Model.Saving_Methods" Role="Saving_Methods" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Saving_Methods">
+              <PropertyRef Name="Method_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Saving_Method_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Traders">
+          <End Type="elaunch_pos2Model.Trader" Role="Trader" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trader">
+              <PropertyRef Name="Trader_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Trader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Products_Products">
+          <End Type="elaunch_pos2Model.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Products">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Details_Refund">
+          <End Type="elaunch_pos2Model.Refund" Role="Refund" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Refund_Details" Role="Refund_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refund">
+              <PropertyRef Name="Refund_ID" />
+            </Principal>
+            <Dependent Role="Refund_Details">
+              <PropertyRef Name="Refund_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refund_Details_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.Refund_Details" Role="Refund_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Refund_Details">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sub_Product_Branches_Sub_Products">
+          <End Type="elaunch_pos2Model.Sub_Products" Role="Sub_Products" Multiplicity="1" />
+          <End Type="elaunch_pos2Model.Sub_Product_Branches" Role="Sub_Product_Branches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Product_Branches">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_System_Users_User_Types">
+          <End Type="elaunch_pos2Model.User_Types" Role="User_Types" Multiplicity="0..1" />
+          <End Type="elaunch_pos2Model.System_Users" Role="System_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Types">
+              <PropertyRef Name="User_Type_ID" />
+            </Principal>
+            <Dependent Role="System_Users">
+              <PropertyRef Name="User_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="elaunch_pos2ModelStoreContainer" CdmEntityContainer="elaunch_posEntities">
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Bank">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
+                <ScalarProperty Name="Bank_ID" ColumnName="Bank_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Branch">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+                <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cashier_Device">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Cashier_Device">
+              <MappingFragment StoreEntitySet="Cashier_Device">
+                <ScalarProperty Name="Device_Token" ColumnName="Device_Token" />
+                <ScalarProperty Name="Device_Type" ColumnName="Device_Type" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cashier_Key">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Cashier_Key">
+              <MappingFragment StoreEntitySet="Cashier_Key">
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="API_Key" ColumnName="API_Key" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cashiers">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Cashier">
+              <MappingFragment StoreEntitySet="Cashiers">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Is_Logged_In" ColumnName="Is_Logged_In" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="PIN_Code" ColumnName="PIN_Code" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Refund_PIN_Code" ColumnName="Refund_PIN_Code" />
+                <ScalarProperty Name="Cashier_Prefix" ColumnName="Cashier_Prefix" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Cashiers_Name" ColumnName="Cashiers_Name" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Category_Image" ColumnName="Category_Image" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Daily_Balance">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Daily_Balance">
+              <MappingFragment StoreEntitySet="Daily_Balance">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Closing_Value" ColumnName="Closing_Value" />
+                <ScalarProperty Name="Opening_Value" ColumnName="Opening_Value" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+                <ScalarProperty Name="Balance_Date" ColumnName="Balance_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ID_Types">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.ID_Types">
+              <MappingFragment StoreEntitySet="ID_Types">
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_In">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_In">
+              <MappingFragment StoreEntitySet="Inventory_In">
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Expiry_Date" ColumnName="Expiry_Date" />
+                <ScalarProperty Name="Remaining_Quantity" ColumnName="Remaining_Quantity" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_IN_Request_Items">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_IN_Request_Items">
+              <MappingFragment StoreEntitySet="Inventory_IN_Request_Items">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_IN_Requests">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_IN_Requests">
+              <MappingFragment StoreEntitySet="Inventory_IN_Requests">
+                <ScalarProperty Name="Request_No" ColumnName="Request_No" />
+                <ScalarProperty Name="Date_Completed" ColumnName="Date_Completed" />
+                <ScalarProperty Name="User_Completed" ColumnName="User_Completed" />
+                <ScalarProperty Name="Is_Completed" ColumnName="Is_Completed" />
+                <ScalarProperty Name="Request_Date" ColumnName="Request_Date" />
+                <ScalarProperty Name="Trader_ID" ColumnName="Trader_ID" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_Out">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_Out">
+              <MappingFragment StoreEntitySet="Inventory_Out">
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Out_Reason_ID" ColumnName="Out_Reason_ID" />
+                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_Out_Reasons">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_Out_Reasons">
+              <MappingFragment StoreEntitySet="Inventory_Out_Reasons">
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Reason_Name" ColumnName="Reason_Name" />
+                <ScalarProperty Name="Reason_ID" ColumnName="Reason_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_Transfer_Items">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_Transfer_Items">
+              <MappingFragment StoreEntitySet="Inventory_Transfer_Items">
+                <ScalarProperty Name="Date_Accepted" ColumnName="Date_Accepted" />
+                <ScalarProperty Name="User_Accepted" ColumnName="User_Accepted" />
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Is_Accepted" ColumnName="Is_Accepted" />
+                <ScalarProperty Name="Transfer_Quantity" ColumnName="Transfer_Quantity" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Transfer_ID" ColumnName="Transfer_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory_Transfers">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Inventory_Transfers">
+              <MappingFragment StoreEntitySet="Inventory_Transfers">
+                <ScalarProperty Name="Transfer_No" ColumnName="Transfer_No" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Transfer_Date" ColumnName="Transfer_Date" />
+                <ScalarProperty Name="To_Branch_ID" ColumnName="To_Branch_ID" />
+                <ScalarProperty Name="From_Branch_ID" ColumnName="From_Branch_ID" />
+                <ScalarProperty Name="Transafer_ID" ColumnName="Transafer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_Details">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Invoice_Details">
+              <MappingFragment StoreEntitySet="Invoice_Details">
+                <ScalarProperty Name="Net_Price" ColumnName="Net_Price" />
+                <ScalarProperty Name="Product_Tax" ColumnName="Product_Tax" />
+                <ScalarProperty Name="Selling_Price" ColumnName="Selling_Price" />
+                <ScalarProperty Name="Trader_Portion" ColumnName="Trader_Portion" />
+                <ScalarProperty Name="Company_Commission" ColumnName="Company_Commission" />
+                <ScalarProperty Name="Management_Discount" ColumnName="Management_Discount" />
+                <ScalarProperty Name="Product_Discount" ColumnName="Product_Discount" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Bracode" ColumnName="Bracode" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="Detail_ID" ColumnName="Detail_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Net_Sales" ColumnName="Net_Sales" />
+                <ScalarProperty Name="QR_Code" ColumnName="QR_Code" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Credit_Card" ColumnName="Credit_Card" />
+                <ScalarProperty Name="SPAN" ColumnName="SPAN" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="Total_Management_Discount" ColumnName="Total_Management_Discount" />
+                <ScalarProperty Name="Total_Products_Discount" ColumnName="Total_Products_Discount" />
+                <ScalarProperty Name="Total_Tax" ColumnName="Total_Tax" />
+                <ScalarProperty Name="Total_Sales" ColumnName="Total_Sales" />
+                <ScalarProperty Name="Management_Discount_ID" ColumnName="Management_Discount_ID" />
+                <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
+                <ScalarProperty Name="Numeric_Invoice_No" ColumnName="Numeric_Invoice_No" />
+                <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageWords">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.LanguageWord">
+              <MappingFragment StoreEntitySet="LanguageWords">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Arabic" ColumnName="Arabic" />
+                <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Management_Discounts">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Management_Discounts">
+              <MappingFragment StoreEntitySet="Management_Discounts">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="To_Date" ColumnName="To_Date" />
+                <ScalarProperty Name="From_Date" ColumnName="From_Date" />
+                <ScalarProperty Name="Doscount_Percentage" ColumnName="Doscount_Percentage" />
+                <ScalarProperty Name="Discount_Code" ColumnName="Discount_Code" />
+                <ScalarProperty Name="Discount_Name" ColumnName="Discount_Name" />
+                <ScalarProperty Name="Discount_ID" ColumnName="Discount_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_Types">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Payment_Types">
+              <MappingFragment StoreEntitySet="Payment_Types">
+                <ScalarProperty Name="Payment_Type_Name" ColumnName="Payment_Type_Name" />
+                <ScalarProperty Name="Payment_Type_ID" ColumnName="Payment_Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Payment_Ref" ColumnName="Payment_Ref" />
+                <ScalarProperty Name="Payment_Type_ID" ColumnName="Payment_Type_ID" />
+                <ScalarProperty Name="Is_Completed" ColumnName="Is_Completed" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+                <ScalarProperty Name="Payment_Amount" ColumnName="Payment_Amount" />
+                <ScalarProperty Name="Bank_ID" ColumnName="Bank_ID" />
+                <ScalarProperty Name="Trader_ID" ColumnName="Trader_ID" />
+                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="Page_Code" ColumnName="Page_Code" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Ratings">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Product_Ratings">
+              <MappingFragment StoreEntitySet="Product_Ratings">
+                <ScalarProperty Name="Rating_Datetime" ColumnName="Rating_Datetime" />
+                <ScalarProperty Name="Price_Eval" ColumnName="Price_Eval" />
+                <ScalarProperty Name="Shape_Eval" ColumnName="Shape_Eval" />
+                <ScalarProperty Name="Taste_Eval" ColumnName="Taste_Eval" />
+                <ScalarProperty Name="Detail_ID" ColumnName="Detail_ID" />
+                <ScalarProperty Name="Rating_ID" ColumnName="Rating_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Validity_Days" ColumnName="Validity_Days" />
+                <ScalarProperty Name="Saving_Method_ID" ColumnName="Saving_Method_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Product_Image" ColumnName="Product_Image" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Trader_ID" ColumnName="Trader_ID" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Refunds">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Refund">
+              <MappingFragment StoreEntitySet="Refund">
+                <ScalarProperty Name="Total_Refunded" ColumnName="Total_Refunded" />
+                <ScalarProperty Name="Total_Taxes" ColumnName="Total_Taxes" />
+                <ScalarProperty Name="Cashier_ID" ColumnName="Cashier_ID" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Refund_Date" ColumnName="Refund_Date" />
+                <ScalarProperty Name="Original_Sales_Invoice_ID" ColumnName="Original_Sales_Invoice_ID" />
+                <ScalarProperty Name="Refund_ID" ColumnName="Refund_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Refund_Details">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Refund_Details">
+              <MappingFragment StoreEntitySet="Refund_Details">
+                <ScalarProperty Name="Net_Refunded" ColumnName="Net_Refunded" />
+                <ScalarProperty Name="Product_Discount" ColumnName="Product_Discount" />
+                <ScalarProperty Name="Management_Discount" ColumnName="Management_Discount" />
+                <ScalarProperty Name="Company_Commission" ColumnName="Company_Commission" />
+                <ScalarProperty Name="Trader_Portion" ColumnName="Trader_Portion" />
+                <ScalarProperty Name="Refunded_Quantity" ColumnName="Refunded_Quantity" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Refund_ID" ColumnName="Refund_ID" />
+                <ScalarProperty Name="Details_ID" ColumnName="Details_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saving_Methods">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Saving_Methods">
+              <MappingFragment StoreEntitySet="Saving_Methods">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="Method_Name" ColumnName="Method_Name" />
+                <ScalarProperty Name="Method_ID" ColumnName="Method_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Product_Branches">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Sub_Product_Branches">
+              <MappingFragment StoreEntitySet="Sub_Product_Branches">
+                <ScalarProperty Name="Available_Amount" ColumnName="Available_Amount" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Product_Branch_ID" ColumnName="Product_Branch_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Products">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Sub_Products">
+              <MappingFragment StoreEntitySet="Sub_Products">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="Available_Amount" ColumnName="Available_Amount" />
+                <ScalarProperty Name="Commission_Type" ColumnName="Commission_Type" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Discount_Type" ColumnName="Discount_Type" />
+                <ScalarProperty Name="Product_Discount" ColumnName="Product_Discount" />
+                <ScalarProperty Name="Selling_Price" ColumnName="Selling_Price" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="Sub_Product_Name" ColumnName="Sub_Product_Name" />
+                <ScalarProperty Name="Sub_Product_Image" ColumnName="Sub_Product_Image" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Sub_Product_Code" ColumnName="Sub_Product_Code" />
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_Users">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.System_Users">
+              <MappingFragment StoreEntitySet="System_Users">
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="User_Created" ColumnName="User_Created" />
+                <ScalarProperty Name="User_Type_ID" ColumnName="User_Type_ID" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taxes">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Tax">
+              <MappingFragment StoreEntitySet="Tax">
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Tax_Percentage" ColumnName="Tax_Percentage" />
+                <ScalarProperty Name="Tax_ID" ColumnName="Tax_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Traders">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.Trader">
+              <MappingFragment StoreEntitySet="Traders">
+                <ScalarProperty Name="is_Registration_Completed" ColumnName="is_Registration_Completed" />
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="User_Updated" ColumnName="User_Updated" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="Email_Verified" ColumnName="Email_Verified" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Mobile_Verified" ColumnName="Mobile_Verified" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Snapchat" ColumnName="Snapchat" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Instegram" ColumnName="Instegram" />
+                <ScalarProperty Name="Maarof" ColumnName="Maarof" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Bank_Account_Holder" ColumnName="Bank_Account_Holder" />
+                <ScalarProperty Name="Commercial_License_ID" ColumnName="Commercial_License_ID" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="Bank_ID" ColumnName="Bank_ID" />
+                <ScalarProperty Name="Experiences" ColumnName="Experiences" />
+                <ScalarProperty Name="Issue_Place" ColumnName="Issue_Place" />
+                <ScalarProperty Name="Issue_Date" ColumnName="Issue_Date" />
+                <ScalarProperty Name="ID_Type" ColumnName="ID_Type" />
+                <ScalarProperty Name="National_ID" ColumnName="National_ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="Trader_Code" ColumnName="Trader_Code" />
+                <ScalarProperty Name="Trader_ID" ColumnName="Trader_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Types">
+            <EntityTypeMapping TypeName="elaunch_pos2Model.User_Types">
+              <MappingFragment StoreEntitySet="User_Types">
+                <ScalarProperty Name="User_Type_Name" ColumnName="User_Type_Name" />
+                <ScalarProperty Name="User_Type_ID" ColumnName="User_Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

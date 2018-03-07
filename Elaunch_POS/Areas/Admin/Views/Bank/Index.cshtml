@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Bank List";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div id='myModal' class='modal fade' role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id='myModalContent' class="modal-content modal-popup">
+        </div>
+    </div>
+</div>
+<div class="page-head">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (null != TempData["successmsg"])
+        {
+            <div class="alert alert-success" id="errordiv">
+                <button class="close" data-close="alert" id="closeMsg" type="button"></button>
+                <span>@TempData["successmsg"]</span>
+            </div>
+        }
+        @if (null != TempData["errormsg"])
+        {
+            <div class="alert alert-danger" id="errordiv">
+                <button class="close" data-close="alert" id="closeMsg" type="button"></button>
+                <span>@TempData["errormsg"]</span>
+            </div>
+        }
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase">Bank List</span>
+                </div>
+            </div>
+            <div class="table-scrollable">
+                <table id="example" class="display table table-striped table-bordered table-hover order-column"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    @*<script src="~/Areas/Admin/assets/plugins/jquery.min.js"></script>*@
+    <script src="~/Content/plugins/jquery.validate.min.js"></script>
+    <script src="~/Content/plugins/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            SetActiveTab("banks");
+            loaderstart();
+            var columns = [
+           { "title": "Bank Name", "data": "Bank_Name" },
+           {
+               "bSortable": false, "className": "alignRight", "width": "45px", "title": "Action", "render": function (data, type, full, meta) {
+                   var url = "@Url.Action("ManageBank", "Bank")/" + full.Bank_ID;
+                   var btns = "<li><a data-editmodal href=\"javascript:void(0)\" onclick=\"OpenPopup('myModal','myModalContent','" + url + "','ModalForm')\" class=\"anchorDetail\" data-id='" + full.Bank_ID + "'><i class=\"fa fa-edit xs-pr-10 font-green\"></i>Edit</a></li>";
+                   btns += "<li><a data-editmodal href=\"javascript:void(0)\" onclick=\"Delete(this,'/Admin/Bank/Delete','Are you sure want to delete?','Ok','Cancel')\" class=\"anchorDetail\" data-id='" + full.Bank_ID + "'><i class=\"fa fa-trash xs-pr-10 font-red\"></i>Delete</a></li>";
+                   var aa = '<div class="dropdown btn-group "><button type="button" data-tooltip=\"true\" title=\"Action\" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button><ul class="dropdown-menu pull-right">' + btns + '</ul></div >';
+                   return aa;
+                  }
+           }];
+            $('#example').createGrid({
+                Columns: columns,
+                Mode: 'BankMaster',
+                SortColumn: '0',
+                SortOrder: 'desc',
+                OnAdd: function () {
+                    loaderstart();
+                    var url = '@Url.Action("ManageBank", "Bank", new { Area = "Admin" })';
+                    OpenPopup('myModal', 'myModalContent', url, 'ModalForm');
+                    loaderstop();
+                    return false;
+                }
+                });
+        });
+        $(window).load(function () {
+            loaderstop();
+        });
+
+        $(document).ready(function () {
+            $("#closeMsg").click(function () {
+                $("#errordiv").hide();
+            });
+        });
+    </script>
+}

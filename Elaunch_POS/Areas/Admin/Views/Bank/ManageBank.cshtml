@@ -1,0 +1,57 @@
+﻿@model Elaunch_POS_Repository.Data.Bank
+@{
+    ViewBag.Title = "Add Bank";
+    Layout = null;
+}
+
+@*<a href="#" class="close-link" data-dismiss="modal" aria-hidden="true"><i class="icon_close_alt2"></i></a>*@
+
+@using (Html.BeginForm("ManageBank", "Bank", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "popup-form", role = "form", id = "ModalForm", data_parsley_validate = "", novalidate = "" }))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">
+            @ViewBag.Check Bank
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                @if (null != TempData["errormsg"])
+                {
+                    <div class="alert alert-danger" id="errordiv">
+                        <button class="close" data-close="alert" id="closeMsg" type="button"></button>
+                        <span>@TempData["errormsg"]</span>
+                    </div>
+                }
+                @Html.HiddenFor(x => x.Bank_ID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bank_Name, "Bank Name"):<span class="text-danger">*</span>
+                    @Html.EditorFor(model => model.Bank_Name, new { htmlAttributes = new { @class = "form-control ", data_val_required = "Bank Name required", PlaceHolder = "Bank Name", parsleyTrigger = "change", required = "true", maxlength = "49" } })
+                    @Html.ValidationMessageFor(model => model.Bank_Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div><hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-primary" id="add" type="submit">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Content/plugins/jquery.validate.min.js"></script>
+<script src="~/Content/plugins/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $('#myModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    $(document).ready(function () {
+        $("#closeMsg").click(function () {
+            $("#errordiv").hide();
+        });
+    });
+</script>

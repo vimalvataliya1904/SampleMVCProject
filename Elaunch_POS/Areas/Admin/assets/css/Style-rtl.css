@@ -1,0 +1,47 @@
+﻿@import url('/Areas/Admin/assets/css/bootstrap-rtl.min.css');
+@import url('/Areas/Admin/assets/css/bootstrap-switch-rtl.min.css');
+@import url('/Areas/Admin/assets/css/components-rtl.min.css');
+@import url('/Areas/Admin/assets/css/plugins-rtl.min.css');
+@import url('/Areas/Admin/assets/css/layout-rtl.min.css');
+@import url('/Areas/Admin/assets/css/default-rtl.min.css');
+@import url('/Areas/Admin/assets/css/custom-rtl.min.css');
+@import url('/Areas/Admin/assets/css/datatables-rtl.min.css');
+@import url('/Areas/Admin/assets/css/datatables-rtl.bootstrap.css');
+@import url('/Areas/Admin/assets/css/helper-rtl.css');
+
+@font-face {
+    font-family: myFontL;
+    src: url('../../../Admin/assets/fonts/DroidKufi-Regular.ttf') format('truetype');
+    src: url('../../../Admin/assets/fonts/DroidKufi-Regular.eot');
+    src: url('../../../Admin/assets/fonts/DroidKufi-Regular.woff') format('woff');
+    /*src: url('../../../Admin/assets/fonts/DroidKufi-Regular.woff2') format('woff2');*/
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*@font-face {
+    font-family: myFontL;
+    src: url('/Areas/Admin/assets/fonts/GESSTwoL.ttf') format('truetype');
+    src: url('/Areas/Admin/assets/fonts/GESSTwoL.otf') format("opentype");
+    src: url('/Areas/Admin/assets/fonts/GESSTwoL.WOFF') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: myFontR;
+    src: url('/Areas/Admin/assets/fonts/GESSTwoM.ttf') format('truetype');
+    src: url('/Areas/Admin/assets/fonts/GESSTwoM.otf') format("opentype");
+    src: url('/Areas/Admin/assets/fonts/GESSTwoM.WOFF') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: myFontB;
+    src: url('/Areas/Admin/assets/fonts/GESSTwoB.ttf') format('truetype');
+    src: url('/Areas/Admin/assets/fonts/GESSTwoB.otf') format("opentype");
+    src: url('/Areas/Admin/assets/fonts/GESSTwoB.WOFF') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}*/
